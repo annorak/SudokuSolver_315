@@ -1,6 +1,0 @@
-[submodule "gtk"]
-	path = gtk
-	url = https://github.com/GNOME/gtk
-[submodule "meson"]
-	path = meson
-	url = https://github.com/mesonbuild/meson
