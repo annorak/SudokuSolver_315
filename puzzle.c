@@ -4,9 +4,7 @@
 // N is the size of the 2D matrix   N*N
 #define N 9
 
-int * createPuzzle(){
-
-    int *puzzle;
+int *createPuzzle(){
 
     // 0 means unassigned cells
     int grid[N][N] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
@@ -19,9 +17,42 @@ int * createPuzzle(){
                        { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
                        { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
 
-    puzzle =  grid;
+    int *puzzle = malloc(grid);
     
-    return puzle;
+    return puzzle;
+}
+
+// Checks whether it will be legal 
+// to assign num to the
+// given row, col
+int checkPuzzle(int grid[N][N], int row,
+                       int col, int num)
+{
+     
+    // Check if we find the same num
+    // in the similar row , we return 0
+    for (int x = 0; x <= 8; x++)
+        if (grid[row][x] == num)
+            return 0;
+ 
+    // Check if we find the same num in the
+    // similar column , we return 0
+    for (int x = 0; x <= 8; x++)
+        if (grid[x][col] == num)
+            return 0;
+ 
+    // Check if we find the same num in the
+    // particular 3*3 matrix, we return 0
+    int startRow = row - row % 3,
+                 startCol = col - col % 3;
+   
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            if (grid[i + startRow][j +
+                          startCol] == num)
+                return 0;
+ 
+    return 1;
 }
 
 /* Takes a partially filled-in grid and attempts
@@ -29,8 +60,7 @@ to assign values to all unassigned locations in
 such a way to meet the requirements for
 Sudoku solution (non-duplication across rows,
 columns, and boxes) */
-int solveSuduko(int grid[N][N], int row, int col)
-{
+int solveSudoku(int grid[N][N], int row, int col){
      
     // Check if we have reached the 8th row
     // and 9th column (0
@@ -51,7 +81,7 @@ int solveSuduko(int grid[N][N], int row, int col)
     // of the grid already contains
     // value >0, we iterate for next column
     if (grid[row][col] > 0)
-        return solveSuduko(grid, row, col + 1);
+        return solveSudoku(grid, row, col + 1);
  
     for (int num = 1; num <= N; num++)
     {
@@ -59,7 +89,7 @@ int solveSuduko(int grid[N][N], int row, int col)
         // Check if it is safe to place
         // the num (1-9)  in the
         // given row ,col  ->we move to next column
-        if (isSafe(grid, row, col, num)==1)
+        if (checkPuzzle(grid, row, col, num)==1)
         {
             /* assigning the num in the
                current (row,col)
@@ -71,7 +101,7 @@ int solveSuduko(int grid[N][N], int row, int col)
            
             //  Checking for next possibility with next
             //  column
-            if (solveSuduko(grid, row, col + 1)==1)
+            if (solveSudoku(grid, row, col + 1)==1)
                 return 1;
         }
        
@@ -97,3 +127,13 @@ void main(){
  
 
 }
+
+void printPuzzle(int *puzzle){
+    printf("The current sudoku puzzle is: ");
+    printf(*puzzle);
+}
+
+int *createSudoku(){
+    createPuzzle();
+}
+
