@@ -137,9 +137,7 @@ void main()
 
         printf("You chose option number: %d\n\n", menuSelection);
 
-        switch(menuSelection){
-            case 1:; 
-            // 0 means unassigned cells
+        if(menuSelection == 1){
             int gridEasy[N][N] =    
                        {{ 3, 0, 6, 5, 0, 8, 4, 0, 0 },
                        { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
@@ -154,8 +152,10 @@ void main()
                 print(gridEasy);
             else
                 printf("No solution exists");
-            case 2:;
-            int gridMedium[N][N] =    
+        }
+
+        else if(menuSelection == 2){
+                        int gridMedium[N][N] =    
                         { { 2, 0, 0, 0, 0, 0, 1, 0, 0 },
                         { 0, 8, 3, 0, 0, 0, 0, 0, 0 },
                         { 1, 0, 0, 6, 8, 0, 4, 0, 0 },
@@ -169,8 +169,10 @@ void main()
                 print(gridMedium);
             else
                 printf("No solution exists");
-            case 3:; 
-            int gridHard[N][N] =     
+        }
+
+        else if(menuSelection == 3){
+                        int gridHard[N][N] =     
                          { { 0, 0, 0, 0, 7, 0, 0, 0, 0 },
                          { 0, 4, 0, 0, 0, 9, 0, 5, 0 },
                          { 8, 0, 0, 6, 2, 0, 9, 0, 3 },
@@ -184,7 +186,6 @@ void main()
                 print(gridHard);
             else
                 printf("No solution exists");
-
         }
         }
         while (0 == 0);
