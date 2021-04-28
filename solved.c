@@ -124,8 +124,38 @@ int solvePuzzle(int grid[N][N], int row, int col)
 
 void printOutput(char *stringOutput, size_t size, size_t nmemb, void *stream)
 {
-    printf("API call follows: ")
-    printf("\n%s\n", stringOutput);
+
+// API call follows: {"$id":"1"
+// "currentDateTime":"2021-04-27T22:27-04:00"
+// "utcOffset":"-04:00:00"
+// "isDayLightSavingsTime":true
+// "dayOfTheWeek":"Tuesday"
+// "timeZoneName":"Eastern Standard Time"
+// "currentFileTime":132640360474356102
+// "ordinalDate":"2021-117"
+// "serviceResponse":null}    
+
+    char *delim = strtok(stringOutput, ",");
+
+    //printing parts of the string, add delim to go to next line
+        printf("------World Time API------\n\n");
+        delim = strtok(NULL, ","); //first line junk (blank)
+        printf("Date & time: ");
+        printf("%s\n\n",delim + 18); //currentDateTime 
+        delim = strtok(NULL, ","); //next line
+        delim = strtok(NULL, ","); //utcOffset (blank)
+        delim = strtok(NULL, ","); //isDayLightSavingsTime (blank)
+        printf("Day of the week: ");
+        printf("%s\n\n",delim + 15); //dayOfTheWeek
+        delim = strtok(NULL, ","); //next line
+        printf("Timezone: ");
+        printf("%s\n\n",delim + 15); //timeZoneName
+        delim = strtok(NULL, ","); //next line
+        delim = strtok(NULL, ","); //currentFileTime (blank)
+        delim = strtok(NULL, ","); //ordinalDate (blank)
+        delim = strtok(NULL, ","); //serviceResponse (blank)
+        printf("--------------------------\n\n");
+
 }
 
 
